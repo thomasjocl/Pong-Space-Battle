@@ -1001,6 +1001,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1879941398, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879941398, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1425418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879941398, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1425418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879941398, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227150496832352853, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.g
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227150496832352853, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.b
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227150496832352853, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4227150496832352855, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
       propertyPath: m_Name
       value: DuplicatePU
