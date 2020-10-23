@@ -20,8 +20,8 @@ public class Ball : MonoBehaviour
     public bool maxVelEnable;
     public Vector2 maxVelocity;
 
-    static readonly BallProperties duplicateBall = new BallProperties { ColorSprite = new Color(255, 100, 100), ColorGlow = new Color(250, 36, 36) };
-    static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(122, 255, 114), ColorGlow = new Color(190, 255, 114) };
+    static readonly BallProperties duplicateBall = new BallProperties { ColorSprite = new Color(1f, 0.39f, 0.39f), ColorGlow = new Color(1f, 0.14f, 0.14f) };
+    static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(122f, 255f, 114f), ColorGlow = new Color(190, 255, 114) };
 
     float simpleSpeed;
 
@@ -30,6 +30,9 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         light = GetComponent<Light2D>();
+
+        if (state == State.duplicate_ball)
+            ChangeDuplicateBallState();
     }
 
     void Update()

@@ -41,7 +41,7 @@ public class DuplicatePU : MonoBehaviour
 
             _ball.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel * -1);
 
-            _ball.GetComponent<Ball>().ChangeDuplicateBallState();
+            _ball.GetComponent<Ball>().state = Ball.State.duplicate_ball;
         }
 
         collision.gameObject.GetComponent<Ball>().ChangeDuplicateBallState();
