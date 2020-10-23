@@ -8,7 +8,10 @@ public class Ball : MonoBehaviour
     Vector2 mousePos;
     Vector2 lookDir;
 
-    public bool flagOriginal;
+    public enum State { speed_ball, duplicate_ball, simple_ball }
+    public State state;
+
+    public bool flagOriginal; 
 
     void Start()
     {
@@ -40,4 +43,10 @@ public class Ball : MonoBehaviour
             }
         }
     } 
+
+    void ChangeDuplicateState()
+    {
+        state = State.duplicate_ball;
+
+    }
 }
