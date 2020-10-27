@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     Vector2 lookDir;
     SpriteRenderer sprite;
     Light2D light;
+    ParticleSystem particle;
 
     public enum State { speed_ball, duplicate_ball, simple_ball }
 
@@ -18,10 +19,13 @@ public class Ball : MonoBehaviour
     public bool flagOriginal;
 
     public bool maxVelEnable;
+
     public Vector2 maxVelocity;
 
-    static readonly BallProperties duplicateBall = new BallProperties { ColorSprite = new Color(1f, 0.39f, 0.39f), ColorGlow = new Color(1f, 0.14f, 0.14f) };
-    static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(122f, 255f, 114f), ColorGlow = new Color(190, 255, 114) };
+    static readonly BallProperties duplicateBall = new BallProperties { ColorSprite = new Color(1f, 0.39f, 0.39f), ColorGlow = new Color(1f, 0.45f, 0.45f) };
+    static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(0.6f, 1f, 0.6f), ColorGlow = new Color(0.75f, 1f, 0.45f) };
+
+    public bool flagIncrementVelocity;
 
     float simpleSpeed;
 
@@ -30,6 +34,7 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         light = GetComponent<Light2D>();
+        particle = GetComponent<ParticleSystem>();
 
         if (state == State.duplicate_ball)
             ChangeDuplicateBallState();
@@ -48,13 +53,21 @@ public class Ball : MonoBehaviour
             v *= speed;
             rb.velocity = v;
 
+            if (Mathf.Abs(rb.velocity.x) > maxVelocity.x)
+                rb.velocity = new Vector2(maxVelocity.x, rb.velocity.y) * new Vector2((rb.velocity.x < 0) ? -1 : 1, 1);
+
+            if (Mathf.Abs(rb.velocity.y) > maxVelocity.y)
+                rb.velocity = new Vector2(rb.velocity.x, maxVelocity.y) * new Vector2(1, (rb.velocity.y < 0) ? -1 : 1);
+
+            if ((Mathf.Abs(rb.velocity.x) > maxVelocity.x) || (Mathf.Abs(rb.velocity.y) > maxVelocity.y))
+                flagIncrementVelocity = false;
+
+
             if (Input.GetKeyDown(KeyCode.Mouse0) && cam != null)
             {
                 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 lookDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-                rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed;
-                Debug.Log(rb.velocity);
-                Debug.Log(rb.velocity.magnitude);
+                rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed; 
             }
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -67,25 +80,35 @@ public class Ball : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
                 GetComponent<SpriteRenderer>().color = duplicateBall.ColorSprite;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Ball")) 
+            particle.Emit(100); 
     }
 
     public void ChangeDuplicateBallState()
     {
         state = State.duplicate_ball;
         sprite.color = duplicateBall.ColorSprite;
-        //light.color = duplicateBall.ColorGlow;
+        light.color = duplicateBall.ColorGlow;
+        particle.startColor = duplicateBall.ColorSprite;
     }
 
     public void ChangeSpeedBallState(float boost)
     {
+        Debug.Log("old speed " + speed);
         state = State.speed_ball;
         sprite.color = speedBall.ColorSprite;
-        light.color = speedBall.ColorGlow; 
+        light.color = speedBall.ColorGlow;
         simpleSpeed = speed;
         speed *= boost;
+        Debug.Log("new speed " + speed);
+        particle.startColor = duplicateBall.ColorSprite;
     }
 
     public void ChangeSimpleBallState()

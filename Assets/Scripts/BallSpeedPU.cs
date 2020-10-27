@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BallSpeedPU : MonoBehaviour
 {
-    public GameObject ball;
     ParticleSystem explosion;
     SpriteRenderer sprite;
     bool enable;
+    public float boost;
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +27,9 @@ public class BallSpeedPU : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
-
-        var yVel = collision.gameObject.GetComponent<Rigidbody2D>().velocity.y;
-
-        var xVel = Mathf.Atan(Random.Range(45, 135) * Mathf.Deg2Rad) * yVel;
-
         if (enable)
         {
-            var _vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
-
-            var _ball = Instantiate(ball);
-
-            _ball.transform.position = collision.transform.position;
-
-            _ball.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel * -1);
+            collision.gameObject.GetComponent<Ball>().ChangeSpeedBallState(boost);
         }
 
         enable = false;

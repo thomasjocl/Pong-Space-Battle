@@ -35,7 +35,7 @@ public class DuplicatePU : MonoBehaviour
         {
             var _vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-            var _ball = Instantiate(ball);
+            var _ball = Instantiate(collision.gameObject);
 
             _ball.transform.position = collision.transform.position;
 

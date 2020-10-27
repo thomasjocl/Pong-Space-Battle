@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3152224336174598816
+--- !u!1 &5251174999613740681
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,14 +8,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3152224336174598831}
-  - component: {fileID: 3152224336174598828}
-  - component: {fileID: 3152224336174598829}
-  - component: {fileID: 3152224336174598818}
-  - component: {fileID: 3152224336174598825}
-  - component: {fileID: 3152224336174598830}
-  - component: {fileID: 3152224336174598819}
-  - component: {fileID: 4613501459923295847}
+  - component: {fileID: 5251174999613740678}
+  - component: {fileID: 5251174999613740677}
+  - component: {fileID: 5251174999613740676}
+  - component: {fileID: 5251174999613740683}
+  - component: {fileID: 5251174999613740672}
+  - component: {fileID: 5251174999613740679}
+  - component: {fileID: 5251174999613740682}
+  - component: {fileID: 2551126050245280334}
   m_Layer: 0
   m_Name: BallSpeedPU
   m_TagString: Untagged
@@ -23,28 +23,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3152224336174598831
+--- !u!4 &5251174999613740678
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 5251174999613740681}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.88, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &3152224336174598828
+--- !u!50 &5251174999613740677
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -58,13 +58,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &3152224336174598829
+--- !u!58 &5251174999613740676
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -74,13 +74,13 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!212 &3152224336174598818
+--- !u!212 &5251174999613740683
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 710eea8c1beac5b4da08318616371d00, type: 3}
-  m_Color: {r: 0.47926337, g: 1, b: 0.44716978, a: 1}
+  m_Color: {r: 0.28829166, g: 1, b: 0.2867924, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,13 +125,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!198 &3152224336174598825
+--- !u!198 &5251174999613740672
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   serializedVersion: 6
   lengthInSec: 1
   simulationSpeed: 1
@@ -1068,7 +1068,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 50
+        scalar: 100
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4897,14 +4897,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &3152224336174598830
+--- !u!199 &5251174999613740679
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4963,26 +4963,26 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3152224336174598819
+--- !u!114 &5251174999613740682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b36e01acba02854da23ff88a753e876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
---- !u!114 &4613501459923295847
+  boost: 1.2
+--- !u!114 &2551126050245280334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152224336174598816}
+  m_GameObject: {fileID: 5251174999613740681}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -4991,13 +4991,13 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.74509805, g: 1, b: 0.44705886, a: 1}
-  m_Intensity: 3
+  m_Color: {r: 0, g: 1, b: 0.2230215, a: 1}
+  m_Intensity: 5
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
-  m_LightOrder: 0
+  m_LightOrder: 1
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
