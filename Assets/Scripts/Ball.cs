@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Common;
+using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using static Player;
 
 public class Ball : MonoBehaviour
 {
@@ -12,10 +14,10 @@ public class Ball : MonoBehaviour
     Light2D light;
     ParticleSystem particle;
 
-    public enum State { speed_ball, duplicate_ball, simple_ball }
+    public enum State { speed_ball, duplicate_ball, simple_ball } 
 
     public State state;
-
+      
     public bool flagOriginal;
 
     public bool maxVelEnable;
@@ -26,6 +28,9 @@ public class Ball : MonoBehaviour
     static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(0.6f, 1f, 0.6f), ColorGlow = new Color(0.75f, 1f, 0.45f) };
 
     public bool flagIncrementVelocity;
+
+    [SerializeField]
+    PlayerType lastTouch;
 
     float simpleSpeed;
 
@@ -81,7 +86,7 @@ public class Ball : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.Z))
-                GetComponent<SpriteRenderer>().color = duplicateBall.ColorSprite;
+                Debug.Log(rb.velocity);
         }
     }
 
@@ -105,7 +110,7 @@ public class Ball : MonoBehaviour
         state = State.speed_ball;
         sprite.color = speedBall.ColorSprite;
         light.color = speedBall.ColorGlow;
-        simpleSpeed = speed;
+        //simpleSpeed = speed;
         speed *= boost;
         Debug.Log("new speed " + speed);
         particle.startColor = duplicateBall.ColorSprite;
@@ -114,7 +119,12 @@ public class Ball : MonoBehaviour
     public void ChangeSimpleBallState()
     {
         state = State.simple_ball;
-        speed = simpleSpeed;
+        //speed = simpleSpeed;
+    }
+
+    public void ChangeTouchedByState(PlayerType touchedBy)
+    {
+        lastTouch = touchedBy;
     }
 }
 

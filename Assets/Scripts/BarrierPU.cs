@@ -1,6 +1,4 @@
 ﻿using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BarrierPU : MonoBehaviour
@@ -17,7 +15,6 @@ public class BarrierPU : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Q))
         { 
             barrierLeft.transform.Find("Spawn1").GetComponent<SpawnBarrier>().ActivateSpawn();
