@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\BallSpeedPU.cs" />
     <Compile Include="Assets\Common\GeneralProperties.cs" />
     <Compile Include="Assets\Scripts\SpawnBarrier.cs" />
+    <Compile Include="Assets\Scripts\PlayerSpeedPU.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -12,11 +12,17 @@ public class Player : MonoBehaviour
     float speedMovement;
 
     [SerializeField]
-    float speedBoost;
+    float speedBoostBall;
 
     [SerializeField]
     PlayerType playerType;
+     
+    float speedBoostPlayer = 1f;
 
+    float speedBoostEndTime;
+
+    bool flagSpeedBoostActive;
+      
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +49,20 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
                 movePosition.y = Input.GetAxisRaw("P2Movement");
         }
+
+        if(flagSpeedBoostActive)
+        {
+            if(Time.time > speedBoostEndTime)
+            {
+                flagSpeedBoostActive = false;
+                speedBoostPlayer = 1f;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movePosition * speedMovement * Time.deltaTime);
+        rb.MovePosition(rb.position + movePosition * speedMovement * speedBoostPlayer * Time.deltaTime); 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -60,7 +75,7 @@ public class Player : MonoBehaviour
 
             ballScript.ChangeTouchedByState(playerType);
 
-            ballRB.velocity = new Vector2(ballRB.velocity.x * speedBoost, ((1 + ((movePosition.y != 0) ? Random.Range(0.2f, 0.6f) : 0)) * ballRB.velocity.y));
+            ballRB.velocity = new Vector2(ballRB.velocity.x * speedBoostBall, ((1 + ((movePosition.y != 0) ? Random.Range(0.2f, 0.6f) : 0)) * ballRB.velocity.y));
 
             if (ballRB.velocity.y == 0)
                 ballRB.velocity = new Vector2(ballRB.velocity.x, Random.Range(2.5f, 7.5f));
@@ -73,9 +88,14 @@ public class Player : MonoBehaviour
                     ballRB.velocity = new Vector2(ballRB.velocity.x, Random.Range(-0.5f, -0.8f));
             }
 
-            collision.gameObject.GetComponent<Ball>().speed += 0.5f;
-
-            Debug.Log("vel: " + ballRB.velocity + ", norm: " + ballRB.velocity.normalized);
+            collision.gameObject.GetComponent<Ball>().speed += 0.5f; 
         }
+    }
+
+    public void BoostSpeed(float speedBoostTime, float speedBoostMultipler)
+    {
+        speedBoostEndTime = Time.time + speedBoostTime;
+        speedBoostPlayer = speedBoostMultipler;
+        flagSpeedBoostActive = true;
     }
 }
