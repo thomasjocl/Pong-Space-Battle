@@ -4,15 +4,12 @@ namespace Assets.Scripts
 {
     public class SpawnBarrier : MonoBehaviour
     {
-        bool flagActivated;
+        public bool flagActivated;
 
         float endTime;
 
         [SerializeField]
         float duration;
-
-        [SerializeField]
-        Sprite barrierSprite;
 
         GameObject barrier1;
         GameObject barrier2;
@@ -37,21 +34,21 @@ namespace Assets.Scripts
         {
             if (flagActivated)
             {
-                if (barrier1.transform.localScale.y < 4 && barrier2.transform.localScale.y < 4)
+                if (barrier1.transform.localScale.y < maxHeight && barrier2.transform.localScale.y < maxHeight)
                 {
                     //var scaleToIncreaseB1 = new Vector3(0, barrier1.transform.localScale.y * increaseScaleVel * Time.fixedDeltaTime, 0);
                     var scaleToIncreaseB1 = new Vector3(0, scaleToModify, 0);
 
-                    if (scaleToIncreaseB1.y + barrier1.transform.localScale.y > 4)
-                        scaleToIncreaseB1 = new Vector3(0, (4 - barrier1.transform.localScale.y), 0);
+                    if (scaleToIncreaseB1.y + barrier1.transform.localScale.y > maxHeight)
+                        scaleToIncreaseB1 = new Vector3(0, (maxHeight - barrier1.transform.localScale.y), 0);
 
                     barrier1.transform.localScale += scaleToIncreaseB1;
 
                     //var scaleToIncreaseB2 = new Vector3(0, barrier2.transform.localScale.y * increaseScaleVel * Time.fixedDeltaTime, 0);
                     var scaleToIncreaseB2 = new Vector3(0, scaleToModify, 0);
 
-                    if (scaleToIncreaseB2.y + barrier2.transform.localScale.y > 4)
-                        scaleToIncreaseB2 = new Vector3(0, (4 - barrier2.transform.localScale.y), 0);
+                    if (scaleToIncreaseB2.y + barrier2.transform.localScale.y > maxHeight)
+                        scaleToIncreaseB2 = new Vector3(0, (maxHeight - barrier2.transform.localScale.y), 0);
 
                     barrier2.transform.localScale += scaleToIncreaseB2; 
                 }
@@ -62,21 +59,21 @@ namespace Assets.Scripts
                 }
             }
 
-            if (!flagActivated && barrier1.transform.localScale.y > 1 && barrier2.transform.localScale.y > 1)
+            if (!flagActivated && barrier1.transform.localScale.y > 0 && barrier2.transform.localScale.y > 0)
             {
                 //var scaleToDecreaseB1 = new Vector3(0, (5 - barrier1.transform.localScale.y) * decreaseScaleVel * Time.deltaTime, 0);
                 var scaleToDecreaseB1 = new Vector3(0, scaleToModify, 0);
 
-                if (barrier1.transform.localScale.y - scaleToDecreaseB1.y < 1)
-                    scaleToDecreaseB1 = new Vector3(0, (barrier1.transform.localScale.y - 1), 0);
+                if (barrier1.transform.localScale.y - scaleToDecreaseB1.y < 0)
+                    scaleToDecreaseB1 = new Vector3(0, (barrier1.transform.localScale.y), 0);
 
                 barrier1.transform.localScale -= scaleToDecreaseB1;
 
                 //var scaleToDecreaseB2 = new Vector3(0, (5 - barrier2.transform.localScale.y) * decreaseScaleVel * Time.deltaTime, 0);
                 var scaleToDecreaseB2 = new Vector3(0, scaleToModify, 0);
 
-                if (barrier2.transform.localScale.y - scaleToDecreaseB2.y < 1)
-                    scaleToDecreaseB2 = new Vector3(0, (barrier2.transform.localScale.y - 1), 0);
+                if (barrier2.transform.localScale.y - scaleToDecreaseB2.y < 0)
+                    scaleToDecreaseB2 = new Vector3(0, (barrier2.transform.localScale.y), 0);
 
                 barrier2.transform.localScale -= scaleToDecreaseB2;
             }

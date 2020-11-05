@@ -1,7 +1,6 @@
 ﻿using Assets.Common;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using static Player;
 
 public class Ball : MonoBehaviour
 {
@@ -28,9 +27,8 @@ public class Ball : MonoBehaviour
     static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(0.6f, 1f, 0.6f), ColorGlow = new Color(0.75f, 1f, 0.45f) };
 
     public bool flagIncrementVelocity;
-
-    [SerializeField]
-    PlayerType lastTouch;
+     
+    public PlayerType lastTouch;
 
     float simpleSpeed;
 
