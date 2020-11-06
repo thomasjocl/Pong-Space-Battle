@@ -24988,6 +24988,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1270875795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270875797}
+  - component: {fileID: 1270875796}
+  m_Layer: 0
+  m_Name: PUSpawnArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1270875796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270875795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5b2b6f26b5bdf41ac600a0684c467f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DuplicatePU: {fileID: 4227150496832352855, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+  BallSpeedPU: {fileID: 5251174999613740681, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}
+  PlayerSpeedPU: {fileID: 1896754637381234315, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
+  BarrierPU: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
+  minX: -10
+  maxX: 10
+  minY: 5
+  maxY: 5
+  respawnTime: 2
+  maxPowersOnScreen: 0
+--- !u!4 &1270875797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270875795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276609214
 GameObject:
   m_ObjectHideFlags: 0
