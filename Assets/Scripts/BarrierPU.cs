@@ -5,28 +5,24 @@ using UnityEngine;
 public class BarrierPU : MonoBehaviour
 {
     [SerializeField]
-    GameObject barrierLeft;
-
-    [SerializeField]
     bool enable;
 
     SpriteRenderer sprite;
     ParticleSystem explosion;
+
+    GameObject powerUpSpawnArea;
 
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         explosion = GetComponent<ParticleSystem>();
+        powerUpSpawnArea = GameObject.Find("PUSpawnArea");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            barrierLeft.transform.Find("Spawn1").GetComponent<SpawnBarrier>().ActivateSpawn();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +49,7 @@ public class BarrierPU : MonoBehaviour
                 {
                     spawn1.ActivateSpawn();
                     Destroy(gameObject, explosion.main.duration);
+                    powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                     return;
                 }
 
@@ -60,6 +57,7 @@ public class BarrierPU : MonoBehaviour
                 {
                     spawn2.ActivateSpawn();
                     Destroy(gameObject, explosion.main.duration);
+                    powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                     return;
                 }
 
@@ -69,12 +67,14 @@ public class BarrierPU : MonoBehaviour
                     {
                         spawn1.ActivateSpawn(); 
                         Destroy(gameObject, explosion.main.duration);
+                        powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                         return;
                     }
                     else
                     {
                         spawn2.ActivateSpawn();
                         Destroy(gameObject, explosion.main.duration);
+                        powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                         return;
                     }
                 }
@@ -92,6 +92,7 @@ public class BarrierPU : MonoBehaviour
                 {
                     spawn1.ActivateSpawn();
                     Destroy(gameObject, explosion.main.duration);
+                    powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                     return;
                 }
 
@@ -99,6 +100,7 @@ public class BarrierPU : MonoBehaviour
                 {
                     spawn2.ActivateSpawn();
                     Destroy(gameObject, explosion.main.duration);
+                    powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                     return;
                 }
 
@@ -108,12 +110,14 @@ public class BarrierPU : MonoBehaviour
                     {
                         spawn1.ActivateSpawn();
                         Destroy(gameObject, explosion.main.duration);
+                        powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                         return;
                     }
                     else
                     {
                         spawn2.ActivateSpawn();
                         Destroy(gameObject, explosion.main.duration);
+                        powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                         return;
                     }
                 }

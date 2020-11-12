@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speed;
-    public Camera cam;
+    Camera cam;
     Vector2 mousePos;
     Vector2 lookDir;
     SpriteRenderer sprite;
@@ -38,6 +38,8 @@ public class Ball : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         light = GetComponent<Light2D>();
         particle = GetComponent<ParticleSystem>();
+
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         if (state == State.duplicate_ball)
             ChangeDuplicateBallState();

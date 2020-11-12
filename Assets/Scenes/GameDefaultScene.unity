@@ -25017,16 +25017,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5b2b6f26b5bdf41ac600a0684c467f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DuplicatePU: {fileID: 4227150496832352855, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
-  BallSpeedPU: {fileID: 5251174999613740681, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}
-  PlayerSpeedPU: {fileID: 1896754637381234315, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
-  BarrierPU: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
+  powerUps:
+  - Prefab: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
+    Probability: 10
+    RealProbability: 10
+    MaxCurrentOnScreen: 3
+    CurrentOnScreen: 0
+  - Prefab: {fileID: 4227150496832352855, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+    Probability: 20
+    RealProbability: 20
+    MaxCurrentOnScreen: 2
+    CurrentOnScreen: 0
+  - Prefab: {fileID: 1896754637381234315, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
+    Probability: 30
+    RealProbability: 30
+    MaxCurrentOnScreen: 2
+    CurrentOnScreen: 0
+  - Prefab: {fileID: 5251174999613740681, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}
+    Probability: 40
+    RealProbability: 40
+    MaxCurrentOnScreen: 0
+    CurrentOnScreen: 0
   minX: -10
   maxX: 10
-  minY: 5
-  maxY: 5
+  minY: -3
+  maxY: 3
   respawnTime: 2
-  maxPowersOnScreen: 0
+  initRespawnTime: 5
+  maxPowersOnScreen: 2
 --- !u!4 &1270875797
 Transform:
   m_ObjectHideFlags: 0
@@ -41005,6 +41023,10 @@ PrefabInstance:
       propertyPath: barrierLeft
       value: 
       objectReference: {fileID: 31038789}
+    - target: {fileID: 7460571201791161802, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
+      propertyPath: powerUpSpawnArea
+      value: 
+      objectReference: {fileID: 1270875795}
     - target: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
       propertyPath: m_Name
       value: BarrierPU
@@ -41106,6 +41128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DuplicatePU
       objectReference: {fileID: 0}
+    - target: {fileID: 4227150496832352855, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4227150496832352856, guid: 0fb5800acce2b134fa16e1d630c5eeba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -41206,6 +41232,10 @@ PrefabInstance:
     - target: {fileID: 1896754637381234315, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
       propertyPath: m_Name
       value: PlayerSpeedPU
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896754637381234315, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb114e898cd264449beb56d0606d23d, type: 3}
@@ -41477,6 +41507,10 @@ PrefabInstance:
     - target: {fileID: 5251174999613740681, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}
       propertyPath: m_Name
       value: BallSpeedPU
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251174999613740681, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ed92ea6c1c74d7488155c680b4f08f7, type: 3}

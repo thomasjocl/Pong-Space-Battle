@@ -15,11 +15,14 @@ public class PlayerSpeedPU : MonoBehaviour
     [SerializeField]
     float speedBoostMultiplier;
 
+    GameObject powerUpSpawnArea;
+
     // Start is called before the first frame update
     void Start()
     {
         explosion = GetComponent<ParticleSystem>();
         sprite = GetComponent<SpriteRenderer>();
+        powerUpSpawnArea = GameObject.Find("PUSpawnArea");
     }
 
     // Update is called once per frame
@@ -56,6 +59,8 @@ public class PlayerSpeedPU : MonoBehaviour
             explosion.Play();
 
             Destroy(gameObject, explosion.main.duration);
+
+            powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("PlayerSpeedPU");
         }
     }
 }

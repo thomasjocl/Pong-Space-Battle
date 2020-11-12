@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 5155583686636622041, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
+  enable: 1
 --- !u!198 &4227150496832352862
 ParticleSystem:
   m_ObjectHideFlags: 0

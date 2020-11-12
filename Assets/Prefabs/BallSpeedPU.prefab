@@ -4975,6 +4975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b36e01acba02854da23ff88a753e876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 1
   boost: 1.2
 --- !u!114 &2551126050245280334
 MonoBehaviour:
