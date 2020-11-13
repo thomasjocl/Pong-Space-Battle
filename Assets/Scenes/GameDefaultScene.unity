@@ -373,6 +373,77 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &153946258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153946261}
+  - component: {fileID: 153946260}
+  - component: {fileID: 153946259}
+  m_Layer: 0
+  m_Name: GolArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153946259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153946258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388d8ba27e4d47f4a8661bdaaad5ac22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 0
+--- !u!61 &153946260
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153946258}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 15}
+  m_EdgeRadius: 0
+--- !u!4 &153946261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153946258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &173305374
 GameObject:
   m_ObjectHideFlags: 0
@@ -19847,8 +19918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePosition: {x: 0, y: 0}
-  speedMovement: 10
-  speedBoostBall: 1.2
+  speedMovement: 12.5
+  speedBoostBall: 1.15
   playerType: 0
 --- !u!50 &845888472
 Rigidbody2D:
@@ -25042,9 +25113,9 @@ MonoBehaviour:
   maxX: 10
   minY: -3
   maxY: 3
-  respawnTime: 2
-  initRespawnTime: 5
-  maxPowersOnScreen: 2
+  respawnTime: 7
+  initRespawnTime: 8
+  maxPowersOnScreen: 3
 --- !u!4 &1270875797
 Transform:
   m_ObjectHideFlags: 0
@@ -25584,6 +25655,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1433575801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433575803}
+  - component: {fileID: 1433575802}
+  m_Layer: 0
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1433575802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433575801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbc3a3f8a792ac4e819f2a70c4b9a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  P1Score: 0
+  P2Score: 0
+--- !u!4 &1433575803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433575801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518833197
 GameObject:
   m_ObjectHideFlags: 0
@@ -25769,8 +25885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePosition: {x: 0, y: 0}
-  speedMovement: 10
-  speedBoostBall: 1.2
+  speedMovement: 12.5
+  speedBoostBall: 1.15
   playerType: 1
 --- !u!61 &1653827620
 BoxCollider2D:
@@ -41031,6 +41147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarrierPU
       objectReference: {fileID: 0}
+    - target: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
 --- !u!1 &1881741498095077282
@@ -41298,6 +41418,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1276609217}
+    - target: {fileID: 5155583686636622045, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
+      propertyPath: maxVelocity.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155583686636622045, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
+      propertyPath: maxVelocity.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155583686636622045, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
+      propertyPath: maxVelEnable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
 --- !u!199 &5652449859985761819

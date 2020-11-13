@@ -48,8 +48,28 @@ public class PowerUpSpawnArea : MonoBehaviour
             
             nextTimeToSpawnPower = Time.time + respawnTime;
 
-            Instantiate(powerup, new Vector3(UnityEngine.Random.Range(minX, maxX), UnityEngine.Random.Range(minY, maxY), 0), Quaternion.identity);
+            var posX = UnityEngine.Random.Range(minX, maxX);
+
+            var posY = UnityEngine.Random.Range(minY, maxY);
+
+            while(isObjectHere(posX, posY))
+            {
+                posX = UnityEngine.Random.Range(minX, maxX);
+                posY = UnityEngine.Random.Range(minY, maxY); ;
+            } 
+
+            Instantiate(powerup, new Vector3(posX, posY, 0), Quaternion.identity);
         }
+    }
+
+    bool isObjectHere(int posX, int posY)
+    {
+        Vector3 position = new Vector3(posX, posY, 0);
+        Collider[] intersecting = Physics.OverlapSphere(position, 1.5f);
+        if (intersecting.Length != 0) 
+            return true; 
+        else 
+            return false; 
     }
 
     public void PowerUpEnded(string powerup)

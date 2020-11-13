@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerSpeedPU.cs" />
     <Compile Include="Assets\Common\AppHelper.cs" />
+    <Compile Include="Assets\CustomEditors\PowerUpSpawnAreaEditor.cs" />
     <Compile Include="Assets\Scripts\DuplicatePU.cs" />
     <Compile Include="Assets\Scripts\BarrierPU.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
@@ -65,7 +66,8 @@
     <Compile Include="Assets\Common\GeneralProperties.cs" />
     <Compile Include="Assets\Scripts\SpawnBarrier.cs" />
     <Compile Include="Assets\Scripts\PowerUpSpawnArea.cs" />
-    <Compile Include="Assets\CustomEditors\PowerUpSpawnAreaEditor.cs" />
+    <Compile Include="Assets\Scripts\GolArea.cs" />
+    <Compile Include="Assets\Scripts\Score.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
