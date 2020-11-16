@@ -9,10 +9,7 @@ public class Player : MonoBehaviour
     Vector2 movePosition;
 
     [SerializeField]
-    float speedMovement;
-
-    [SerializeField]
-    float speedBoostBall;
+    float speedMovement; 
 
     [SerializeField]
     PlayerType playerType;
@@ -75,20 +72,26 @@ public class Player : MonoBehaviour
 
             ballScript.ChangeTouchedByState(playerType);
 
-            ballRB.velocity = new Vector2(ballRB.velocity.x * speedBoostBall, ((1 + ((movePosition.y != 0) ? Random.Range(0.2f, 0.6f) : 0)) * ballRB.velocity.y));
+            var yAxisSpeedModifier = UnityEngine.Random.Range(1.5f, 2.5f);
+
+            ballRB.velocity = new Vector2(ballRB.velocity.x, ballRB.velocity.y + (movePosition.y  * yAxisSpeedModifier));
+
+            Debug.Log((movePosition.y * yAxisSpeedModifier));
+
+            //ballRB.velocity = new Vector2(ballRB.velocity.x * speedBoostBall, ((1 + ((movePosition.y != 0) ? Random.Range(0.2f, 0.6f) : 0)) * ballRB.velocity.y));
 
             if (ballRB.velocity.y == 0)
                 ballRB.velocity = new Vector2(ballRB.velocity.x, Random.Range(2.5f, 7.5f));
 
-            if(Mathf.Abs(ballRB.velocity.normalized.y) > 0.85f || Mathf.Abs(ballRB.velocity.normalized.y) < 0.15f)
+            if (Mathf.Abs(ballRB.velocity.normalized.y) > 0.85f || Mathf.Abs(ballRB.velocity.normalized.y) < 0.15f)
             {
                 if (ballRB.velocity.y > 0)
-                    ballRB.velocity = new Vector2(ballRB.velocity.x, Random.Range(0.5f, 0.8f));
+                    ballRB.velocity = new Vector2(ballRB.velocity.normalized.x, Random.Range(0.5f, 0.8f));
                 else if (ballRB.velocity.y < 0)
-                    ballRB.velocity = new Vector2(ballRB.velocity.x, Random.Range(-0.5f, -0.8f));
+                    ballRB.velocity = new Vector2(ballRB.velocity.normalized.x, Random.Range(-0.5f, -0.8f));
             }
 
-            collision.gameObject.GetComponent<Ball>().speed += 0.5f; 
+            ballScript.speed += 0.5f; 
         }
     }
 

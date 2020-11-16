@@ -13,13 +13,9 @@ public class Ball : MonoBehaviour
     Light2D light;
     ParticleSystem particle;
 
-    public enum State { speed_ball, duplicate_ball, simple_ball } 
+    public enum State { speed_ball, duplicate_ball, simple_ball }
 
     public State state;
-      
-    public bool flagOriginal;
-
-    public bool maxVelEnable;
 
     public Vector2 maxVelocity;
 
@@ -27,7 +23,7 @@ public class Ball : MonoBehaviour
     static readonly BallProperties speedBall = new BallProperties { ColorSprite = new Color(0.6f, 1f, 0.6f), ColorGlow = new Color(0.75f, 1f, 0.45f) };
 
     public bool flagIncrementVelocity;
-     
+
     public PlayerType lastTouch;
 
     float simpleSpeed;
@@ -47,53 +43,51 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        if (maxVelEnable)
+        var v = rb.velocity.normalized;
+        v *= speed;
+        rb.velocity = v;
+
+        if (Mathf.Abs(rb.velocity.x) > maxVelocity.x)
+            rb.velocity = new Vector2(maxVelocity.x, rb.velocity.y) * new Vector2((rb.velocity.x < 0) ? -1 : 1, 1);
+
+        if (Mathf.Abs(rb.velocity.y) > maxVelocity.y)
+            rb.velocity = new Vector2(rb.velocity.x, maxVelocity.y) * new Vector2(1, (rb.velocity.y < 0) ? -1 : 1);
+
+        if ((Mathf.Abs(rb.velocity.x) > maxVelocity.x) || (Mathf.Abs(rb.velocity.y) > maxVelocity.y))
+            flagIncrementVelocity = false;
+
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && cam != null)
         {
-            if (Mathf.Abs(rb.velocity.x) != maxVelocity.x && Mathf.Abs(rb.velocity.y) != maxVelocity.y)
-                rb.velocity = new Vector2(maxVelocity.x, maxVelocity.y);
-        }
-        else
-        {
-            var v = rb.velocity.normalized;
-            v *= speed;
-            rb.velocity = v;
-
-            if (Mathf.Abs(rb.velocity.x) > maxVelocity.x)
-                rb.velocity = new Vector2(maxVelocity.x, rb.velocity.y) * new Vector2((rb.velocity.x < 0) ? -1 : 1, 1);
-
-            if (Mathf.Abs(rb.velocity.y) > maxVelocity.y)
-                rb.velocity = new Vector2(rb.velocity.x, maxVelocity.y) * new Vector2(1, (rb.velocity.y < 0) ? -1 : 1);
-
-            if ((Mathf.Abs(rb.velocity.x) > maxVelocity.x) || (Mathf.Abs(rb.velocity.y) > maxVelocity.y))
-                flagIncrementVelocity = false;
-
-
-            if (Input.GetKeyDown(KeyCode.Mouse0) && cam != null)
-            {
-                mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-                lookDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-                rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed; 
-            }
-
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                var balls = GameObject.FindGameObjectsWithTag("Ball");
-                foreach (var ball in balls)
-                {
-                    if (!ball.GetComponent<Ball>().flagOriginal)
-                        Destroy(ball);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Z))
-                Debug.Log(rb.velocity);
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            lookDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+            rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ball")) 
-            particle.Emit(100); 
+        var v = rb.velocity.normalized;
+
+        if (collision.transform.CompareTag("Ball"))
+            particle.Emit(100);
+
+        if (collision.transform.CompareTag("BarrierDefault"))
+        {
+             if(v.x < 0.25) 
+                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y); 
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("BarrierDefault"))
+        { 
+            if (rb.velocity.y == 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, (Random.Range(0.5f, 2.5f) * ((transform.position.y > 0) ? 1 : -1)));
+            }
+        }
     }
 
     public void ChangeDuplicateBallState()

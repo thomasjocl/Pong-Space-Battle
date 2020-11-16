@@ -1,6 +1,5 @@
 ﻿using Assets.Common;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class GolArea : MonoBehaviour
@@ -8,12 +7,15 @@ public class GolArea : MonoBehaviour
     [SerializeField]
     PlayerType playerType;
 
+    [SerializeField]
+    bool enable;
 
+    GameObject score;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = GameObject.Find("Score");
     }
 
     // Update is called once per frame
@@ -26,6 +28,9 @@ public class GolArea : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ball"))
         {
+            score.GetComponent<Score>().AddPoint(playerType);
+            if(enable)
+                Destroy(collision.gameObject);
         }
     }
 }

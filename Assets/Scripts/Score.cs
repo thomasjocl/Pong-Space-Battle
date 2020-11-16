@@ -11,12 +11,14 @@ namespace Assets.Scripts
         [SerializeField]
         public int P2Score;
 
-        void AddPoint(PlayerType playerType)
+        public void AddPoint(PlayerType playerType)
         {
             if (playerType == PlayerType.player1)
                 P1Score++;
             else
                 P2Score++;
+
+            Debug.Log("P1: " + P1Score.ToString() + ", P2: " + P2Score.ToString());
         }
     }
 }
