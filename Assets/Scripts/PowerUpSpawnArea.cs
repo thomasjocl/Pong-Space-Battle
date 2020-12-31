@@ -7,6 +7,9 @@ using UnityEngine;
 public class PowerUpSpawnArea : MonoBehaviour
 {
     [SerializeField]
+    bool enable;
+
+    [SerializeField]
     List<PowerUp> powerUps;
 
     [SerializeField]
@@ -18,9 +21,7 @@ public class PowerUpSpawnArea : MonoBehaviour
     [SerializeField]
     int maxPowersOnScreen;
 
-    float nextTimeToSpawnPower;
-
-    float enable;
+    float nextTimeToSpawnPower; 
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class PowerUpSpawnArea : MonoBehaviour
     {
         int countPowersOnScreen = GameObject.FindGameObjectsWithTag("PowerUp").Length;
 
-        if (countPowersOnScreen < maxPowersOnScreen && Time.time > nextTimeToSpawnPower)
+        if (countPowersOnScreen < maxPowersOnScreen && Time.time > nextTimeToSpawnPower && enable)
         {
             var powerup = SpawnPowerUp();
             

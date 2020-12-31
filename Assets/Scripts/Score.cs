@@ -6,10 +6,7 @@ namespace Assets.Scripts
     public class Score: MonoBehaviour
     {
         [SerializeField]
-        public int P1Score;
-
-        [SerializeField]
-        public int P2Score;
+        public int P1Score, P2Score; 
 
         public void AddPoint(PlayerType playerType)
         {

@@ -26,11 +26,12 @@ public class GolArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Ball"))
+        if (collision.transform.parent.CompareTag("Ball"))
         {
             score.GetComponent<Score>().AddPoint(playerType);
+
             if(enable)
-                Destroy(collision.gameObject);
+                Destroy(collision.gameObject.transform.parent);
         }
     }
 }

@@ -1,9 +1,15 @@
-﻿using Assets.Common;
+﻿using Assets.Common; 
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField]
+    bool controlByUser;
+
+    [SerializeField]
+    bool isColliderEnabled;
+
     Rigidbody2D rb;
     public float speed;
     Camera cam;
@@ -11,9 +17,13 @@ public class Ball : MonoBehaviour
     Vector2 lookDir;
     SpriteRenderer sprite;
     Light2D light;
-    ParticleSystem particle;
+    ParticleSystem particleBallBounce;
+    ParticleSystem particleBallIntro;
 
-    public enum State { speed_ball, duplicate_ball, simple_ball }
+    public enum Type { speed_ball, duplicate_ball, simple_ball }
+    public enum State { initializing, normal, disappearing }
+
+    public Type type;
 
     public State state;
 
@@ -26,42 +36,88 @@ public class Ball : MonoBehaviour
 
     public PlayerType lastTouch;
 
-    float simpleSpeed;
+    bool startIntroSFX = true;
+
+    float endTimeInitializing;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         light = GetComponent<Light2D>();
-        particle = GetComponent<ParticleSystem>();
+
+        rb.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        particleBallBounce = transform.parent.Find("SFX_Ball_Bounce").GetComponent<ParticleSystem>();
+        particleBallIntro = transform.parent.Find("SFX_Ball_Intro").GetComponent<ParticleSystem>();
 
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
-        if (state == State.duplicate_ball)
+        if (type == Type.duplicate_ball)
             ChangeDuplicateBallState();
     }
 
     void Update()
     {
-        var v = rb.velocity.normalized;
-        v *= speed;
-        rb.velocity = v;
-
-        if (Mathf.Abs(rb.velocity.x) > maxVelocity.x)
-            rb.velocity = new Vector2(maxVelocity.x, rb.velocity.y) * new Vector2((rb.velocity.x < 0) ? -1 : 1, 1);
-
-        if (Mathf.Abs(rb.velocity.y) > maxVelocity.y)
-            rb.velocity = new Vector2(rb.velocity.x, maxVelocity.y) * new Vector2(1, (rb.velocity.y < 0) ? -1 : 1);
-
-        if ((Mathf.Abs(rb.velocity.x) > maxVelocity.x) || (Mathf.Abs(rb.velocity.y) > maxVelocity.y))
-            flagIncrementVelocity = false;
-
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && cam != null)
+        if (state == State.initializing)
         {
-            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            lookDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-            rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed;
+            if (startIntroSFX)
+            {
+                endTimeInitializing = Time.time + particleBallIntro.main.duration;
+                particleBallIntro.Play();
+            }
+
+            PlayIntroSFX();
+        }
+        else
+        {
+            var v = rb.velocity.normalized;
+            v *= speed;
+            rb.velocity = v;
+
+            if (Mathf.Abs(rb.velocity.x) > maxVelocity.x)
+                rb.velocity = new Vector2(maxVelocity.x, rb.velocity.y) * new Vector2((rb.velocity.x < 0) ? -1 : 1, 1);
+
+            if (Mathf.Abs(rb.velocity.y) > maxVelocity.y)
+                rb.velocity = new Vector2(rb.velocity.x, maxVelocity.y) * new Vector2(1, (rb.velocity.y < 0) ? -1 : 1);
+
+            if ((Mathf.Abs(rb.velocity.x) > maxVelocity.x) || (Mathf.Abs(rb.velocity.y) > maxVelocity.y))
+                flagIncrementVelocity = false;
+
+
+            if (Input.GetKeyDown(KeyCode.Mouse0) && cam != null && controlByUser)
+            {
+                mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                lookDir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+                rb.velocity = new Vector2(lookDir.x, lookDir.y).normalized * speed;
+            } 
+        }
+    }
+
+    public void PlayIntroSFX()
+    {
+        startIntroSFX = false;
+
+        rb.isKinematic = true;
+
+        if (rb.transform.localScale.y < 0.5)
+        {
+            rb.transform.localScale = rb.transform.localScale + (new Vector3(0.5f, 0.5f, 0.5f) * Time.deltaTime);
+        }
+
+        if (rb.transform.localScale.y >= 0.5)
+        {
+            rb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+            if (Time.time > endTimeInitializing && particleBallIntro.particleCount == 0)
+            {
+                rb.isKinematic = false;
+                state = State.normal;
+
+                rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed;
+
+                Debug.Log(rb.velocity);
+            }
         }
     }
 
@@ -70,19 +126,21 @@ public class Ball : MonoBehaviour
         var v = rb.velocity.normalized;
 
         if (collision.transform.CompareTag("Ball"))
-            particle.Emit(100);
+            particleBallBounce.Emit(100);
 
         if (collision.transform.CompareTag("BarrierDefault"))
         {
-             if(v.x < 0.25) 
-                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y); 
+            if (v.x < 0.25)
+                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
         }
+
+        Debug.Log(rb.velocity);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("BarrierDefault"))
-        { 
+        {
             if (rb.velocity.y == 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, (Random.Range(0.5f, 2.5f) * ((transform.position.y > 0) ? 1 : -1)));
@@ -92,27 +150,27 @@ public class Ball : MonoBehaviour
 
     public void ChangeDuplicateBallState()
     {
-        state = State.duplicate_ball;
+        type = Type.duplicate_ball;
         sprite.color = duplicateBall.ColorSprite;
         light.color = duplicateBall.ColorGlow;
-        particle.startColor = duplicateBall.ColorSprite;
+        particleBallBounce.startColor = duplicateBall.ColorSprite;
     }
 
     public void ChangeSpeedBallState(float boost)
     {
         Debug.Log("old speed " + speed);
-        state = State.speed_ball;
+        type = Type.speed_ball;
         sprite.color = speedBall.ColorSprite;
         light.color = speedBall.ColorGlow;
         //simpleSpeed = speed;
         speed *= boost;
         Debug.Log("new speed " + speed);
-        particle.startColor = duplicateBall.ColorSprite;
+        particleBallBounce.startColor = duplicateBall.ColorSprite;
     }
 
     public void ChangeSimpleBallState()
     {
-        state = State.simple_ball;
+        type = Type.simple_ball;
         //speed = simpleSpeed;
     }
 
