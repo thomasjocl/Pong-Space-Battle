@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.parent.CompareTag("Ball"))
+        if (collision.transform.parent != null && collision.transform.parent.CompareTag("Ball"))
         {
             var ballRB = collision.gameObject.GetComponent<Rigidbody2D>();
 

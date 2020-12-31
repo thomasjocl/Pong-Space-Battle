@@ -5,7 +5,7 @@ using UnityEngine;
 public class BarrierPU : MonoBehaviour
 {
     [SerializeField]
-    bool enable;
+    bool enable = true;
 
     SpriteRenderer sprite;
     ParticleSystem explosion;
@@ -27,7 +27,7 @@ public class BarrierPU : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Ball") && enable)
+        if (collision.transform.parent.CompareTag("Ball") && enable)
         {
             enable = false;
 
@@ -63,9 +63,9 @@ public class BarrierPU : MonoBehaviour
 
                 else
                 {
-                    if(Random.Range(0,1) == 0)
+                    if (Random.Range(0, 1) == 0)
                     {
-                        spawn1.ActivateSpawn(); 
+                        spawn1.ActivateSpawn();
                         Destroy(gameObject, explosion.main.duration);
                         powerUpSpawnArea.GetComponent<PowerUpSpawnArea>().PowerUpEnded("BarrierPU");
                         return;

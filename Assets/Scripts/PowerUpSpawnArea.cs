@@ -51,6 +51,9 @@ public class PowerUpSpawnArea : MonoBehaviour
 
             var posX = UnityEngine.Random.Range(minX, maxX);
 
+            while(posX < 1.5f && posX > -1.5f)
+                posX = UnityEngine.Random.Range(minX, maxX);
+
             var posY = UnityEngine.Random.Range(minY, maxY);
 
             while(isObjectHere(posX, posY))
@@ -65,8 +68,8 @@ public class PowerUpSpawnArea : MonoBehaviour
 
     bool isObjectHere(int posX, int posY)
     {
-        Vector3 position = new Vector3(posX, posY, 0);
-        Collider[] intersecting = Physics.OverlapSphere(position, 1.5f);
+        Vector2 position = new Vector3(posX, posY);
+        Collider2D[] intersecting = Physics2D.OverlapCircleAll(position, 2.5f);
         if (intersecting.Length != 0) 
             return true; 
         else 

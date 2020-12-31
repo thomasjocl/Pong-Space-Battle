@@ -46,8 +46,6 @@ public class Ball : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         light = GetComponent<Light2D>();
 
-        rb.transform.localScale = new Vector3(0f, 0f, 0f);
-
         particleBallBounce = transform.parent.Find("SFX_Ball_Bounce").GetComponent<ParticleSystem>();
         particleBallIntro = transform.parent.Find("SFX_Ball_Intro").GetComponent<ParticleSystem>();
 
@@ -114,7 +112,16 @@ public class Ball : MonoBehaviour
                 rb.isKinematic = false;
                 state = State.normal;
 
-                rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * speed;
+                var velocityStartX = Random.Range(-1f, 1f);
+
+                while(velocityStartX < 0.25f && velocityStartX > -0.25f)
+                {
+                    velocityStartX = Random.Range(-1f, 1f);
+                }
+
+                rb.velocity = new Vector2(velocityStartX, Random.Range(-0.25f, 0.25f)) * speed;
+
+                lastTouch = (velocityStartX > 0) ? PlayerType.player1 : PlayerType.player2;
 
                 Debug.Log(rb.velocity);
             }
@@ -132,9 +139,7 @@ public class Ball : MonoBehaviour
         {
             if (v.x < 0.25)
                 rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
-        }
-
-        Debug.Log(rb.velocity);
+        } 
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -157,14 +162,12 @@ public class Ball : MonoBehaviour
     }
 
     public void ChangeSpeedBallState(float boost)
-    {
-        Debug.Log("old speed " + speed);
+    { 
         type = Type.speed_ball;
         sprite.color = speedBall.ColorSprite;
         light.color = speedBall.ColorGlow;
         //simpleSpeed = speed;
-        speed *= boost;
-        Debug.Log("new speed " + speed);
+        speed *= boost; 
         particleBallBounce.startColor = duplicateBall.ColorSprite;
     }
 

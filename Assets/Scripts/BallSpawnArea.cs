@@ -77,12 +77,14 @@ public class BallSpawnArea : MonoBehaviour
         if (level == 2 && ballsOnScreen < 2)
         {
             int ballsToSpawn = 2 - ballsOnScreen;
+             
+            bool validPos1 = isClearZoneToSpawn(0f, 4.5f);
 
-            bool validPos1 = isClearZoneToSpawn(0f, 3.5f);
+            bool validPos2 = isClearZoneToSpawn(0f, 0f);
 
-            bool validPos2 = isClearZoneToSpawn(0f, -3.5f);
+            bool validPos3 = isClearZoneToSpawn(0f, -4.5f);
 
-            if (validPos1 && validPos2)
+            if (validPos1 && validPos2 && validPos3)
             {
                 if (ballsToSpawn == 1)
                 {

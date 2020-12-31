@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 1
-  enable: 0
+  enable: 1
 --- !u!61 &153946260
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -574,6 +574,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 6940680063353947172, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
   scoreGO: {fileID: 1433575801}
+  timeAddToNextLevel: 2
+  maxPointsAddToNextLevel: 5
+  maxPointsToNextLevel: 3
+  level: 1
 --- !u!4 &375571321
 Transform:
   m_ObjectHideFlags: 0
@@ -25133,7 +25137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5b2b6f26b5bdf41ac600a0684c467f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 0
+  enable: 1
   powerUps:
   - Prefab: {fileID: 7460571201791161803, guid: 46d26f2f94887104a8088a9bd118e859, type: 3}
     Probability: 10
@@ -31200,75 +31204,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1983088553
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2221369589039937687, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2221369589039937704, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2928595947063540178, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947172, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_Name
-      value: Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940680063353947174, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1bf6d7d5efa24d84098bff4ace0a798e, type: 3}
 --- !u!1 &1987929800
 GameObject:
   m_ObjectHideFlags: 0
@@ -31300,7 +31235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 0
-  enable: 0
+  enable: 1
 --- !u!61 &1987929802
 BoxCollider2D:
   m_ObjectHideFlags: 0

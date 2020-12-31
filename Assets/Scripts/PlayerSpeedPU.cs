@@ -27,16 +27,12 @@ public class PlayerSpeedPU : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            enable = true;
-        }
+    { 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.transform.CompareTag("Ball") && enable)
+        if (collision.gameObject.transform.parent != null && collision.gameObject.transform.parent.CompareTag("Ball") && enable)
         {
             var ballScript = collision.gameObject.GetComponent<Ball>();
 
