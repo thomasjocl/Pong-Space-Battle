@@ -1,4 +1,4 @@
-﻿using Assets.Common; 
+﻿using Assets.Common;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -121,9 +121,7 @@ public class Ball : MonoBehaviour
 
                 rb.velocity = new Vector2(velocityStartX, Random.Range(-0.25f, 0.25f)) * speed;
 
-                lastTouch = (velocityStartX > 0) ? PlayerType.player1 : PlayerType.player2;
-
-                Debug.Log(rb.velocity);
+                lastTouch = (velocityStartX > 0) ? PlayerType.player1 : PlayerType.player2; 
             }
         }
     }

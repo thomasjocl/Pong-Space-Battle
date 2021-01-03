@@ -51,7 +51,7 @@ public class PowerUpSpawnArea : MonoBehaviour
 
             var posX = UnityEngine.Random.Range(minX, maxX);
 
-            while(posX < 1.5f && posX > -1.5f)
+            while(posX < 2.5f && posX > -2.5f)
                 posX = UnityEngine.Random.Range(minX, maxX);
 
             var posY = UnityEngine.Random.Range(minY, maxY);
