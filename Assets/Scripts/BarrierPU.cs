@@ -32,8 +32,9 @@ public class BarrierPU : MonoBehaviour
             enable = false;
 
             sprite.enabled = false;
-
-            explosion.Play();
+             
+            if (!explosion.isPlaying)
+                explosion.Play();
 
             var ballScript = collision.gameObject.GetComponent<Ball>();
 
@@ -80,7 +81,7 @@ public class BarrierPU : MonoBehaviour
                 }
             }
 
-            if (ballScript.lastTouch == PlayerType.player2 || ballScript.lastTouch == PlayerType.IA)
+            if (ballScript.lastTouch == PlayerType.player2 || ballScript.lastTouch == PlayerType.CPU)
             {
                 var barrierPU = GameObject.Find("BarrierPURight");
 

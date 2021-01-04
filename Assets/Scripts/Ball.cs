@@ -130,7 +130,7 @@ public class Ball : MonoBehaviour
     {
         var v = rb.velocity.normalized;
 
-        if (collision.transform.CompareTag("Ball"))
+        if (collision.transform.parent != null && collision.transform.parent.CompareTag("Ball"))
             particleBallBounce.Emit(100);
 
         if (collision.transform.CompareTag("BarrierDefault"))

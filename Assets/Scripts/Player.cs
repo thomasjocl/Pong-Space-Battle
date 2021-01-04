@@ -1,4 +1,5 @@
 ﻿using Assets.Common;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -20,10 +21,21 @@ public class Player : MonoBehaviour
 
     bool flagSpeedBoostActive;
 
+    Vector2 objBallDirectionToMoveCPU;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if(playerType == PlayerType.none)
+        {
+            if (SceneParameters.GameType == GameType.vsCpu)
+                playerType = PlayerType.CPU;
+            if (SceneParameters.GameType == GameType.vsP2)
+                playerType = PlayerType.player2;
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +59,53 @@ public class Player : MonoBehaviour
                 movePosition.y = Input.GetAxisRaw("P2Movement");
         }
 
+
+        if (playerType == PlayerType.CPU)
+        {
+            var balls = GameObject.FindGameObjectsWithTag("Ball");
+
+            float distancetoBall = 0f;
+
+            foreach (var ball in balls.Where(x => x.transform.Find("Ball_Behaviour").GetComponent<Rigidbody2D>().velocity.x > 0))
+            {
+                var distance = Vector2.Distance(ball.transform.Find("Ball_Behaviour").transform.position, transform.position);
+
+                if (distancetoBall == 0)
+                {
+                    distancetoBall = distance;
+                }
+
+                if (distance <= distancetoBall)
+                {
+                    distancetoBall = distance;
+                    objBallDirectionToMoveCPU = ball.transform.Find("Ball_Behaviour").transform.position;
+                }
+            }
+
+            if (balls.Where(x => x.transform.Find("Ball_Behaviour").GetComponent<Rigidbody2D>().velocity.x > 0).Count() != 0)
+            {
+                var movY = objBallDirectionToMoveCPU.y - transform.position.y;
+
+                if(Mathf.Abs(movY) > 0.5f)
+                {
+                    movePosition.y = (new Vector2(0, objBallDirectionToMoveCPU.y - transform.position.y)).normalized.y;
+                }
+                else
+                {
+                    movePosition.y = movY;
+                }
+
+                //movePosition.y = (new Vector2(0, objBallDirectionToMoveCPU.y - transform.position.y)).normalized.y;
+                //movePosition.y = movY;
+                Debug.Log(movY);
+                Debug.Log((new Vector2(0, objBallDirectionToMoveCPU.y - transform.position.y)).normalized.y);
+            }
+            else
+            {
+                movePosition.y = 0;
+            }
+        }
+
         if (flagSpeedBoostActive)
         {
             if (Time.time > speedBoostEndTime)
@@ -59,6 +118,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if(playerType == PlayerType.player1 || playerType == PlayerType.player2)
         rb.MovePosition(rb.position + movePosition * speedMovement * speedBoostPlayer * Time.deltaTime);
     }
 

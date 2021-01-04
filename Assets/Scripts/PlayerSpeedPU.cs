@@ -42,7 +42,7 @@ public class PlayerSpeedPU : MonoBehaviour
                 p1Script.BoostSpeed(speedBoostTime, speedBoostMultiplier);
             }
 
-            if (ballScript.lastTouch == PlayerType.player2 || ballScript.lastTouch == PlayerType.IA)
+            if (ballScript.lastTouch == PlayerType.player2 || ballScript.lastTouch == PlayerType.CPU)
             {
                 var p2Script = GameObject.Find("Player2").GetComponent<Player>();
                 p2Script.BoostSpeed(speedBoostTime, speedBoostMultiplier);
@@ -51,8 +51,9 @@ public class PlayerSpeedPU : MonoBehaviour
             enable = false;
 
             sprite.enabled = false;
-
-            explosion.Play();
+             
+            if (!explosion.isPlaying)
+                explosion.Play();
 
             Destroy(gameObject, explosion.main.duration);
 

@@ -35,8 +35,9 @@ public class BallSpeedPU : MonoBehaviour
         enable = false;
 
         sprite.enabled = false;
-
-        explosion.Play();
+         
+        if (!explosion.isPlaying)
+            explosion.Play();
 
         Destroy(gameObject, explosion.main.duration);
 
